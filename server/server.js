@@ -16,9 +16,9 @@ io.on('connection', (socket)=>{
     console.log('new user connected');
     socket.emit('newMessage',generateMessage('Admin', 'Welcome to chat app'));
 
-        socket.broadcast.emit('newMessage',generateMessage('Admin', 'New user joined'));
+    socket.broadcast.emit('newMessage',generateMessage('Admin', 'New user joined'));
 
-    socket.on('createMessage', (message)=>{
+    socket.on('createMessage', (message, callbacks)=>{
         console.log('createMessage:', message);
 
         
@@ -26,6 +26,7 @@ io.on('connection', (socket)=>{
         //broadcasting is emitting the message to everybody but one specific user
 
         io.emit('newMessage',generateMessage(message.from, message.text));
+        callbacks('This is from the server.');
 
         // socket.broadcast.emit('newMessage',{
         //     from: message.from,
