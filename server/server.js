@@ -26,7 +26,7 @@ io.on('connection', (socket)=>{
         //broadcasting is emitting the message to everybody but one specific user
 
         io.emit('newMessage',generateMessage(message.from, message.text));
-        callbacks('This is from the server.');
+        callbacks();
 
         // socket.broadcast.emit('newMessage',{
         //     from: message.from,
